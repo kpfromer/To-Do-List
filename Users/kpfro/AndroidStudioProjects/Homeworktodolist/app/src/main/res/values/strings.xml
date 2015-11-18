@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Homeworktodolist</string>
+    <string name="task_add">+</string>
+    <string name="task_entry">Enter An Entry</string>
+    <string name="menu_delete">Delete</string>
+    <string name="menu_edit">Edit</string>
+</resources>
