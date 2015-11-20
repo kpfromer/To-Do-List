@@ -261,7 +261,7 @@ public class MainActivity extends AppCompatActivity {
         s = s.replace("sat", "");
         s = s.replace("sun", "");
 
-        return s.substring(0,1).toUpperCase() + s.substring(1).toLowerCase();
+        return s.substring(0,1).toUpperCase() + s.substring(1).toLowerCase().replaceAll("\\s+", " ");
     }
     public LocalDate getDate(String taskText){
         taskText = taskText.toLowerCase();
