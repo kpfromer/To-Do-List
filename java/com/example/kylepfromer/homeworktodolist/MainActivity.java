@@ -27,6 +27,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -81,24 +82,17 @@ public class MainActivity extends AppCompatActivity {
                 if(item.getItemId() == R.id.menu_delete) {
                     //Delete Item In ListView
                     SparseBooleanArray checked = listView.getCheckedItemPositions();
-                    List<String> NoneList = new ArrayList<String>();
-                    NoneList.add("");
-                    NoneList.add("");
-                    for (int i = 0; i < listView.getCount(); i++) {
-                        if (checked.valueAt(i) == true) {
-                            data.set(checked.keyAt(i), NoneList);
+
+                    List<String> deleteList = new ArrayList<String>();
+                    deleteList.add("");
+                    deleteList.add("");
+
+                    for (int i = 0; i < checked.size(); i++) {
+                        if (checked.valueAt(i)) {
+                            data.set(checked.keyAt(i), deleteList);
                         }
                     }
-                    for (int i = 0; i < data.size(); i++) {
-                        if (data.get(i).get(0) == "") {
-                            data.remove(i);
-                        }
-                    }
-                    for (int i = 0; i < data.size(); i++) {
-                        if (data.get(i).get(0) == "") {
-                            data.remove(i);
-                        }
-                    }
+                    data.removeAll(Collections.singleton(deleteList));
                     mTasksAdapter.notifyDataSetChanged();
                     setDataFile(data);
                 }else if (item.getItemId() == R.id.menu_edit){

@@ -76,7 +76,7 @@ public class task_notification_handler {
                 } catch (Exception e){}//Fix
             }
             return finalStr;
-        } catch (IndexOutOfBoundsException e) {
+        } catch (Exception e) {
             return "";
         }
     }
@@ -153,8 +153,8 @@ public class task_notification_handler {
                                      Integer.toString(lc.getMonthOfYear()) + "/" +
                                      Integer.toString(lc.getDayOfMonth()) + "/" +
                                      Integer.toString(lc.getYear()) + " " +
-                                     Integer.toString(lc.getHourOfDay()) + ":" +
-                                     Integer.toString(lc.getMinuteOfHour()+1)//Revert back to original
+                                     Integer.toString(7) + ":" +
+                                     Integer.toString(0)//Revert back to original
                              )).toDate());
                              timer.schedule(new sN(), (fmt.parseLocalDateTime(
                                      Integer.toString(lc.getMonthOfYear()) + "/" +
