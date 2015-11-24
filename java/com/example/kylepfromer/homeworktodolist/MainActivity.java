@@ -130,15 +130,17 @@ public class MainActivity extends AppCompatActivity {
                         List<String> task = new ArrayList<String>();
                         //DUEDATE is placeholder for when i get
                         //the duedate text graber working!
-                        try {
-                            task.add(deleteDateIfFound(mEdit.getText().toString()));
-                            task.add(getDate(mEdit.getText().toString()).toString());
-                        } catch (NullPointerException e){
-                            task.add(mEdit.getText().toString());
-                            task.add("");
+                        if(mEdit.getText().toString() != "") {//Fixed not adding empty Tasks
+                            try {
+                                task.add(deleteDateIfFound(mEdit.getText().toString()));
+                                task.add(getDate(mEdit.getText().toString()).toString());
+                            } catch (NullPointerException e) {
+                                task.add(mEdit.getText().toString());
+                                task.add("");
+                            }
+                            data.add(task);
+                            setDataFile(data);
                         }
-                        data.add(task);
-                        setDataFile(data);
                     }else{
                         List<String> EditList = new ArrayList<String>();
                         try {

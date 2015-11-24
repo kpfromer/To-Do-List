@@ -139,7 +139,7 @@ public class task_notification_handler {
 
             final DateTimeFormatter fmt = DateTimeFormat.forPattern("MM/dd/yyyy kk:mm");
             Timer timer = new Timer();
-            TimerTask doAsynchronousTask = new TimerTask() {
+            TimerTask notificationScheduler = new TimerTask() {
                 final Handler handler = new Handler();
                 @Override
                 public void run() {
@@ -154,7 +154,7 @@ public class task_notification_handler {
                                      Integer.toString(lc.getDayOfMonth()) + "/" +
                                      Integer.toString(lc.getYear()) + " " +
                                      Integer.toString(7) + ":" +
-                                     Integer.toString(0)//Revert back to original
+                                     Integer.toString(0)
                              )).toDate());
                              timer.schedule(new sN(), (fmt.parseLocalDateTime(
                                      Integer.toString(lc.getMonthOfYear()) + "/" +
@@ -167,8 +167,16 @@ public class task_notification_handler {
                     });
                 }
             };
-            timer.scheduleAtFixedRate(doAsynchronousTask, new LocalDate().toDate(), 86400000);//Run everyday starting when app is started up
-
+            LocalDateTime nowDate = new LocalDateTime();
+            LocalDateTime schDate = fmt.parseLocalDateTime(
+                    Integer.toString(nowDate.getMonthOfYear()) + "/" +
+                            Integer.toString(nowDate.getDayOfMonth()) + "/" +
+                            Integer.toString(nowDate.getYear()) + " " +
+                            Integer.toString(1) + ":" +
+                            Integer.toString(0)
+            );
+            timer.scheduleAtFixedRate(notificationScheduler, schDate.toDate(), 86400000);//Run everyday starting at 1am
+            notificationScheduler.run();//Run the notification today
         }
     }
 }
